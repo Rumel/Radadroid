@@ -1,6 +1,7 @@
 package us.rumel.radabite.radadroid.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,6 +50,10 @@ public class CameraActivity extends Activity {
             } catch (IOException e) {
                 Log.d(TAG, "Error accessing file: " + e.getMessage());
             }
+
+            Intent i = new Intent(getApplicationContext(), ImagePreviewActivity.class);
+            i.setData(Uri.parse(pictureFile.toURI().toString()));
+            startActivity(i);
         }
     };
 
@@ -101,14 +106,14 @@ public class CameraActivity extends Activity {
         // using Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+                Environment.DIRECTORY_PICTURES), "Radabite");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                Log.d("MyCameraApp", "failed to create directory");
+                Log.d("Radabite", "failed to create directory");
                 return null;
             }
         }
