@@ -43,7 +43,7 @@ public class ImagePreviewActivity extends Activity {
             }
         });
 
-        ImageLoader.getInstance().displayImage("file:///" + getIntent().getData().toString(), iv, dio);
+        ImageLoader.getInstance().displayImage("file:///" + getIntent().getData().toString(), iv);
     }
 
 
