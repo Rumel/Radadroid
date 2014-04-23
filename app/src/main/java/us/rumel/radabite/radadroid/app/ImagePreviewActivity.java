@@ -2,6 +2,8 @@ package us.rumel.radabite.radadroid.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
 
 
 public class ImagePreviewActivity extends Activity {
@@ -23,10 +27,10 @@ public class ImagePreviewActivity extends Activity {
 
         setContentView(R.layout.activity_image_preview);
 
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
-//        ImageLoader.getInstance().init(config);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
+        ImageLoader.getInstance().init(config);
 
-        ImageView iv = (ImageView) findViewById(R.id.image_post_preview);
+        final ImageView iv = (ImageView) findViewById(R.id.image_post_preview);
         Button button = (Button) findViewById(R.id.button_post);
 
         button.setOnClickListener(new View.OnClickListener(){
@@ -34,15 +38,12 @@ public class ImagePreviewActivity extends Activity {
             public void onClick(View v) {
                 Toast t = Toast.makeText(getApplicationContext(), "Posted to Radabite", Toast.LENGTH_SHORT);
                 t.show();
+
                 startActivity(new Intent(getApplicationContext(), CameraActivity.class));
             }
         });
 
-        iv.setImageDrawable(getResources().getDrawable(R.drawable.abc_ic_search));
-
-//        ImageLoader.getInstance().displayImage(getIntent().getData().toString(), iv);
-//
-//        iv.setVisibility(View.VISIBLE);
+        ImageLoader.getInstance().displayImage("file:///" + getIntent().getData().toString(), iv, dio);
     }
 
 
