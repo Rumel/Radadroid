@@ -1,13 +1,17 @@
 package us.rumel.radabite.radadroid.app;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -52,7 +56,7 @@ public class CameraActivity extends Activity {
             }
 
             Intent i = new Intent(getApplicationContext(), ImagePreviewActivity.class);
-            i.setData(Uri.parse(pictureFile.toURI().toString()));
+            i.setData(Uri.parse(pictureFile.toString()));
             startActivity(i);
         }
     };
